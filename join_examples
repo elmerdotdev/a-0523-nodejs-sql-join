@@ -1,0 +1,35 @@
+CREATE DATABASE join_examples;
+
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    department_id INT
+);
+
+CREATE TABLE departments (
+    department_id SERIAL PRIMARY KEY,
+    department_name VARCHAR(100)
+);
+
+-- Inserting data into departments
+INSERT INTO departments (department_name) VALUES ('HR'), ('Engineering'), ('Marketing');
+
+-- Inserting data into employees
+INSERT INTO employees (name, department_id) VALUES ('Alice', 1), ('Bob', 2), ('Charlie', NULL), ('David', 3), ('Eve', NULL);
+
+
+SELECT e.name, d.department_name
+FROM employees e
+INNER JOIN departments d ON e.department_id = d.department_id;
+
+SELECT e.name, d.department_name
+FROM employees e
+LEFT JOIN departments d ON e.department_id = d.department_id;
+
+SELECT e.name, d.department_name
+FROM employees e
+RIGHT JOIN departments d ON e.department_id = d.department_id;
+
+SELECT e.name, d.department_name
+FROM employees e
+FULL JOIN departments d ON e.department_id = d.department_id;
